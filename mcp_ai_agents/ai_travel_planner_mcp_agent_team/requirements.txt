@@ -1,9 +1,25 @@
-agno==1.2.13
-mcp==1.6.0
-streamlit==1.44.1
-google-api-python-client==2.118.0
-google-auth==2.28.1
-google-auth-oauthlib==1.2.0
-python-dotenv==1.0.1
-requests==2.31.0
-openai==1.12.0
+# AI 旅行规划 MCP 智能体团队 - 项目依赖
+# 本文件列出了项目运行所需的所有 Python 包及其版本
+
+# AI 智能体框架
+agno==1.2.13                    # Agno 框架：用于构建和管理 AI 智能体团队
+
+# MCP 协议支持
+mcp==1.6.0                      # Model Context Protocol：统一的工具和服务集成协议
+
+# Web 应用框架
+streamlit==1.44.1               # Streamlit：用于构建交互式 Web 应用界面
+
+# Google API 客户端库
+google-api-python-client==2.118.0  # Google API 客户端：用于调用 Google Calendar API
+google-auth==2.28.1             # Google 认证库：处理 OAuth 2.0 身份验证
+google-auth-oauthlib==1.2.0     # Google OAuth 库：简化 OAuth 2.0 流程
+
+# 配置管理
+python-dotenv==1.0.1            # 环境变量管理：从 .env 文件加载配置
+
+# HTTP 请求库
+requests==2.31.0                # HTTP 请求库：用于 API 调用和网络请求
+
+# AI 模型接口
+openai==1.12.0                  # OpenAI API 客户端：用于调用 GPT 模型

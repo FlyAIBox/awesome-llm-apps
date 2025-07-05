@@ -13,5 +13,11 @@ Pillow==10.0.0
 # Google AI Studio SDK - 用于与Google AI Studio模型通信
 google-generativeai==0.8.3
 
+# 用于与Google AI Studio模型通信
+google-genai==1.24.0         
+
 # Google搜索结果 - 用于执行Google搜索
 google_search_results==2.4.2
+
+# 用于执行DuckDuckGo搜索
+duckduckgo_search==8.0.5

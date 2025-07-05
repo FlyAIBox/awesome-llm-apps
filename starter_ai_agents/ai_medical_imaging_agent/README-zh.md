@@ -12,6 +12,28 @@
   - 图像质量评估
   - 研究和参考资料查询
 
+```mermaid
+graph TD
+    A["用户界面<br/>(Streamlit Web App)"] --> B["图像上传模块<br/>(File Upload)"]
+    B --> C["图像预处理<br/>(Pillow)"]
+    C --> D["AI 代理层<br/>(Agno Framework)"]
+    D --> E["Gemini 2.0 Flash<br/>(AI 模型)"]
+    D --> F["DuckDuckGo Search<br/>(文献检索)"]
+    E --> G["医疗影像分析"]
+    F --> H["相关文献查询"]
+    G --> I["结构化诊断报告"]
+    H --> I
+    I --> J["患者友好解释"]
+    J --> K["最终分析结果"]
+    K --> A
+    
+    style A fill:#e1f5fe
+    style D fill:#f3e5f5
+    style E fill:#fff3e0
+    style F fill:#e8f5e8
+    style I fill:#fce4ec
+```
+
 ## 运行指南
 
 1. **环境设置**

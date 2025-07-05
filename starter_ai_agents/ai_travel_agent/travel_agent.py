@@ -5,7 +5,7 @@ import streamlit as st
 from agno.models.openai import OpenAIChat
 
 # 设置 Streamlit 应用界面
-st.title("AI Travel Planner ✈️")
+st.title("AI旅行助手 ✈️")
 st.caption("使用AI旅行规划师规划您的下一次冒险，通过GPT-4o自动研究和规划个性化行程")
 
 # 从用户获取 OpenAI API 密钥

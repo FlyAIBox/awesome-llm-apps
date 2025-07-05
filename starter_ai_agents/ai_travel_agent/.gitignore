@@ -116,4 +116,6 @@ Thumbs.db
 models/
 
 # Streamlit特定
-.streamlit/config.toml 
+# .streamlit/config.toml 
+# 脚本
+start_app.sh

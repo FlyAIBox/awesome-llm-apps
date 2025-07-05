@@ -60,6 +60,7 @@ python --version  # 应该显示 Python 3.10.x
 
 #### 2. 克隆项目仓库
 ```bash
+## 【FIXME: 其他仓库记得修改GitHub仓库和项目目录】
 # 克隆GitHub仓库
 git clone https://github.com/Shubhamsaboo/awesome-llm-apps.git
 
@@ -110,13 +111,25 @@ python -c "from serpapi import GoogleSearch; print('SerpAPI安装成功')"
 ### 第三步：配置API密钥
 
 #### 1. 获取OpenAI API密钥
+##### 方式一
 - 访问 [OpenAI平台](https://platform.openai.com/)
 - 注册账户并创建API密钥
 - 复制您的API密钥（格式：sk-...）
 
+##### 方式二
+- 访问 [OpenAI 国内代理平台](https://www.apiyi.com/register/?aff_code=we80)
+- 注册账户并创建API密钥
+- 复制您的API密钥（格式：sk-...）
+- 修改API地址
+```bash
+# 在大多数情况下，OpenAI官方库或者一些常用的第三方库会优先识别并使用 OPENAI_API_BASE 或 OPENAI_BASE_URL 作为其 API 地址。
+./set_bashrc_env.sh OPENAI_API_BASE "https://vip.apiyi.com/v1"
+./set_bashrc_env.sh OPENAI_BASE_URL "https://vip.apiyi.com/v1"
+```
+
 #### 2. 获取SerpAPI密钥
 - 访问 [SerpAPI官网](https://serpapi.com/)
-- 注册账户并获取API密钥
+- 注册账户并获取API密钥(免费用户，100/每月调用次数)
 - 复制您的API密钥
 
 #### 3. 配置本地密钥文件

@@ -1,0 +1,52 @@
+# AI旅行助手 - Streamlit应用配置文件
+
+[global]
+# 开发模式设置
+developmentMode = false
+
+# 数据帧显示设置
+dataFrameSerialization = "legacy"
+
+[server]
+# 服务器设置
+port = 8501
+baseUrlPath = ""
+enableCORS = false
+enableXsrfProtection = true
+
+# 文件上传设置
+maxUploadSize = 200
+maxMessageSize = 200
+
+# 会话设置
+enableWebsocketCompression = false
+
+[browser]
+# 浏览器设置
+serverAddress = "localhost"
+gatherUsageStats = false
+serverPort = 8501
+
+[theme]
+# 主题设置 - 现代化的蓝色主题
+primaryColor = "#FF6B6B"           # 主要颜色 - 珊瑚红
+backgroundColor = "#FFFFFF"        # 背景颜色 - 白色
+secondaryBackgroundColor = "#F0F2F6"  # 次要背景颜色 - 浅灰
+textColor = "#262730"             # 文字颜色 - 深灰
+font = "sans serif"               # 字体
+
+[client]
+# 客户端设置
+showErrorDetails = false
+toolbarMode = "viewer"
+
+[runner]
+# 运行器设置
+magicEnabled = true
+installTracer = false
+fixMatplotlib = true
+
+[logger]
+# 日志设置
+level = "info"
+messageFormat = "%(asctime)s %(message)s" 

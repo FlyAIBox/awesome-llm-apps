@@ -3,16 +3,65 @@ from agno.agent import Agent
 from agno.tools.serpapi import SerpApiTools
 import streamlit as st
 from agno.models.openai import OpenAIChat
+import os
 
 # 设置 Streamlit 应用界面
 st.title("AI旅行助手 ✈️")
 st.caption("使用AI旅行规划师规划您的下一次冒险，通过GPT-4o自动研究和规划个性化行程")
 
-# 从用户获取 OpenAI API 密钥
-openai_api_key = st.text_input("请输入OpenAI API密钥以访问GPT-4o", type="password")
+# 从配置文件或环境变量读取API配置
+def get_config_value(key, default=None):
+    """从streamlit secrets或环境变量中获取配置值"""
+    try:
+        # 首先尝试从streamlit secrets中读取
+        if hasattr(st, 'secrets') and key in st.secrets:
+            value = st.secrets[key]
+            st.write(f"✓ 从 secrets.toml 读取到 {key}: {value[:10]}..." if len(str(value)) > 10 else f"✓ 从 secrets.toml 读取到 {key}: {value}")
+            return value
+        else:
+            # 如果secrets不可用或没有该键，从环境变量读取
+            env_value = os.getenv(key, default)
+            if env_value:
+                st.write(f"✓ 从环境变量读取到 {key}: {env_value[:10]}..." if len(str(env_value)) > 10 else f"✓ 从环境变量读取到 {key}: {env_value}")
+            else:
+                st.write(f"⚠️ 未找到配置项 {key}")
+            return env_value
+    except Exception as e:
+        st.error(f"读取配置 {key} 时出错: {str(e)}")
+        # 如果secrets不可用，从环境变量读取
+        env_value = os.getenv(key, default)
+        if env_value:
+            st.write(f"✓ 从环境变量读取到 {key}: {env_value[:10]}..." if len(str(env_value)) > 10 else f"✓ 从环境变量读取到 {key}: {env_value}")
+        return env_value
 
-# 从用户获取 SerpAPI 密钥
-serp_api_key = st.text_input("请输入SerpAPI密钥以启用搜索功能", type="password")
+# 获取配置值
+openai_base_url = get_config_value("OPENAI_BASE_URL", "https://api.openai.com/v1")
+openai_api_key_from_config = get_config_value("OPENAI_API_KEY")
+serp_api_key_from_config = get_config_value("SERPAPI_KEY")
+
+# 显示配置信息
+st.info(f"当前 OpenAI API 基础地址: {openai_base_url}")
+
+# OpenAI API 配置
+if openai_api_key_from_config:
+    st.success("✓ OpenAI API密钥已从配置文件加载")
+    openai_api_key = openai_api_key_from_config
+else:
+    openai_api_key = st.text_input("请输入OpenAI API密钥以访问GPT-4o", type="password")
+
+# OpenAI Base URL 配置
+openai_base_url_input = st.text_input(
+    "请输入OpenAI API地址以访问GPT-4o", 
+    value=openai_base_url,
+    help="默认为 https://api.openai.com/v1，如果使用代理服务可以修改此地址"
+)
+
+# SerpAPI 配置
+if serp_api_key_from_config:
+    st.success("✓ SerpAPI密钥已从配置文件加载")
+    serp_api_key = serp_api_key_from_config
+else:
+    serp_api_key = st.text_input("请输入SerpAPI密钥以启用搜索功能", type="password")
 
 # 当用户提供了两个API密钥后，初始化AI智能体
 if openai_api_key and serp_api_key:
@@ -21,7 +70,11 @@ if openai_api_key and serp_api_key:
     researcher = Agent(
         name="Researcher",  # 智能体名称
         role="根据用户偏好搜索旅行目的地、活动和住宿",  # 智能体角色
-        model=OpenAIChat(id="gpt-4o", api_key=openai_api_key),  # 使用GPT-4o模型
+        model=OpenAIChat(
+            id="gpt-4o", 
+            api_key=openai_api_key,
+            base_url=openai_base_url_input
+        ),  # 使用GPT-4o模型并设置base_url
         description=dedent(
             """\
         您是一位世界级的旅行研究专家。根据用户提供的旅行目的地和旅行天数，
@@ -44,7 +97,11 @@ if openai_api_key and serp_api_key:
     planner = Agent(
         name="Planner",  # 智能体名称
         role="基于用户偏好和研究结果生成行程草案",  # 智能体角色
-        model=OpenAIChat(id="gpt-4o", api_key=openai_api_key),  # 使用GPT-4o模型
+        model=OpenAIChat(
+            id="gpt-4o", 
+            api_key=openai_api_key,
+            base_url=openai_base_url_input
+        ),  # 使用GPT-4o模型并设置base_url
         description=dedent(
             """\
         您是一位资深的旅行规划师。根据用户提供的旅行目的地、旅行天数和研究结果列表，

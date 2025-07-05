@@ -1,4 +1,15 @@
-streamlit 
-agno
-openai
-google-search-results
+# AI旅行助手项目依赖包
+# 适用于Python 3.10.x环境
+
+# Web应用框架 - 用于构建交互式用户界面
+streamlit==1.46.1
+
+# AI智能体框架 - 用于创建和管理AI智能体
+agno==1.7.1
+
+# OpenAI官方SDK - 用于与GPT-4o等模型通信
+openai==1.93.0
+
+# SerpAPI客户端 - 用于执行Google搜索
+google_search_results==2.4.2
+
